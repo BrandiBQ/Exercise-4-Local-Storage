@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML 5 Web Storage</title>
+
+<link href="reset.css" type="text/css" rel="stylesheet" />
+
+<link href="webStorage_Style.css" type="text/css" rel="stylesheet" />
+
+<script>
+window.addEventListener("load",init);
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	
+	var button=document.getElementById("button");
+	button.addEventListener("click",saveInfo);
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo(){
+	var elDonutType=document.getElementById("donutType").value;
+	var elSprinkles=document.getElementById("sprinkles").value;
+    var elGlaze=document.getElementById("glaze").value;
+    var elCoffee=document.getElementById("coffee").value;
+	
+	localStorage.setItem("donut",elDonutType);
+	localStorage.setItem("sprinkles",elSprinkles);
+	localStorage.setItem("glaze",elGlaze);
+    localStorage.setItem("coffee",elCoffee);
+	
+	display();
+	
+}
+
+function display(){
+	var rightBox=document.getElementById("useroutput");
+	var theDonut=localStorage.getItem("donut");
+	var sprinkles=localStorage.getItem("sprinkles");
+    var glaze=localStorage.getItem("glaze");
+    var coffee=localStorage.getItem("coffee");
+	
+	if(coffee==undefined){
+		document.getElementById("useroutput").innerHTML="";
+	}
+	else{ document.getElementById("useroutput").innerHTML="OUTPUT  <hr /><br /><br />Donut type: "+theDonut+"<br /><br />Sprinkles included: "+sprinkles+"<br /><br />Extra glaze request: "+glaze+"<br /><br />Cup 'o joe: "+coffee;
+	}
+	
+}
+
+</script>
+</head>
+<body>
+<div id="main">
+	<section id="userinput">
+    INPUT <br>
+	<hr />
+    <br /><br />
+    <form>
+    
+    <div>What kind of donut would you like: <br /><input type="text" id="donutType" size="20"></div>
+    <br />
+    <div>Would you like sprinkles (Yes/No):<br /> <input type="text" id="sprinkles" size="20"></div>
+    <br />
+    <div>How 'bout extra glaze on that donut (Yes/No): <br /><input type="text" id="glaze" size="20"></div>
+    <br />
+    <div>Would you like to wash all that down with a cup of coffee: <br /><input type="text" id="coffee" size="20"></div>
+    <br />
+    <div><input type="button" id="button" value="Save"></div>
+    
+    </form>
+    </section>
+    
+    
+    <section id="useroutput">
+ OUTPUT  
+ 	<hr />
+    <br /><br />
+    </section>
+
+</div>
+
+
+
+</body>
+</html>
